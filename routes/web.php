@@ -10,6 +10,8 @@ Route::group(['namespace' => 'Site'], function () {
     Route::get('/services', 'SiteController@services')->name('front.services');
     Route::get('/contact', 'SiteController@contact')->name('front.contact');
     Route::get('/partner', 'SiteController@partner')->name('front.partner');
+    Route::post('/partner/register', 'SiteController@partnerregister')->name('partner.front.register');
+    Route::get('/site/payment', 'SiteController@paymentdone')->name('paymentdone.screen');
 });
 
 Route::get('/home', function () {
@@ -42,7 +44,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('audit-logs', 'AuditLogsController', ['except' => ['create', 'store', 'edit', 'update', 'destroy']]);
 
     // Vehicle Category
+
     Route::delete('vehicle-categories/destroy', 'VehicleCategoryController@massDestroy')->name('vehicle-categories.massDestroy');
+    Route::post('vehicle-categories/media', 'VehicleCategoryController@storeMedia')->name('vehicle-categories.storeMedia');
     Route::post('vehicle-categories/parse-csv-import', 'VehicleCategoryController@parseCsvImport')->name('vehicle-categories.parseCsvImport');
     Route::post('vehicle-categories/process-csv-import', 'VehicleCategoryController@processCsvImport')->name('vehicle-categories.processCsvImport');
     Route::resource('vehicle-categories', 'VehicleCategoryController');
@@ -87,12 +91,17 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('orders/destroy', 'OrderController@massDestroy')->name('orders.massDestroy');
     Route::post('orders/parse-csv-import', 'OrderController@parseCsvImport')->name('orders.parseCsvImport');
     Route::post('orders/process-csv-import', 'OrderController@processCsvImport')->name('orders.processCsvImport');
+    Route::get('orders/new', 'OrderController@neworders')->name('orders.new');
+    Route::get('orders/new/assign/{order}', 'OrderController@neworderassignview')->name('assignorder.view');
+    Route::put('orders/new/assignpost/{order}', 'OrderController@neworderassign')->name('assignorder.post');
     Route::resource('orders', 'OrderController');
 
     // Partner
     Route::delete('partners/destroy', 'PartnerController@massDestroy')->name('partners.massDestroy');
     Route::post('partners/parse-csv-import', 'PartnerController@parseCsvImport')->name('partners.parseCsvImport');
     Route::post('partners/process-csv-import', 'PartnerController@processCsvImport')->name('partners.processCsvImport');
+    Route::get('partners/accept/{partner}', 'PartnerController@accept')->name('partners.accept');
+    Route::get('partners/deny/{partner}', 'PartnerController@deny')->name('partners.deny');
     Route::resource('partners', 'PartnerController');
 
     // Partner User
@@ -137,6 +146,36 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
     }
 });
 
+Route::get('send/push',function(){
+    $SERVER_API_KEY = 'AAAAklbjYF8:APA91bEvG2Vvv6cS0KUwhUpPH0t4TfqpaXsW5B-5oOSDpwGGXjGdpnVE4CQX0F49WOYXL5sFKUh7GwuEWdyQ8DOhkTdjXJZ_YGiSPKkVm5S1Qakj4d55-Bhj-Sai2zEKbCA3_9U1f5zW';
+    $data = [
+        //"registration_ids" => $tokens,
+        'to' => "fiGlB9tFSoahQxDlV1N9Cy:APA91bGuJZOtSQScCO9awOkLuofSYowc2a7VgHSW3aSUsYuS9QPvYO58E3B2_7DRMrGodcxm-PhWvpNYFbUpWiLGRD56f0duwcCzFcKC9433nerGaNmwdt3HAkQblYge0hldkZm7C4un",
+        "data" => array(
+            'message'=>'hi',
+            'title'=>"data"
+        )
 
+
+    ];
+    $dataString = json_encode($data);
+
+    $headers = [
+        'Authorization: key=' . $SERVER_API_KEY,
+        'Content-Type: application/json',
+    ];
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $dataString);
+
+    $response = curl_exec($ch);
+    dd($response);
+});
 
 

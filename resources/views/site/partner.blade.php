@@ -7,7 +7,7 @@
 						<div class="about-text">
 							<ul class="crumbs d-flex">
 								<li><a href="index.html">Home</a></li>
-								<li class="two"><a href="index.html"><i class="fa-solid fa-right-long"></i>Blog</a></li>
+								<li class="two"><a href="index.html"><i class="fa-solid fa-right-long"></i>Partner Registration</a></li>
 							</ul>
 							<h2>Want to join partnership?</h2>
 							<p>Egestas sed tempus urna et pharetra pharetra massa. Fermentum posuere urna nec tincidunt praesent semper.</p>
@@ -15,25 +15,33 @@
 					</div>
 					<div class="col-lg-6">
 					<div class="join-courier">
-						<h3>Join Courier</h3>
-						<p>Egestas sed tempus urna et pharetra pharetra massa. Fermentum posuere urna nec tincidunt praesent semper.</p>
-						<form class="blog-form">
-							<div class="name-form">
+		
+						<h3>Register</h3>
+						<span id="successtxt" class="badge badge-pill badge-success">Success</span>
+						
+							<div class="row">
+							<div class="name-form col-6">
 								<i class="fa-regular fa-user"></i>
-								<input type="text" name="name" placeholder="Enter your name">
+								<input type="text" name="name" id="name" placeholder="Enter your name">
 							</div>
-							<div class="name-form">
+							<div class="name-form col-6">
 								<i class="fa-solid fa-phone"></i>
-								<input type="text" name="phone" placeholder="Enter your phone">
+								<input type="text" name="phone" id="phone" placeholder="Enter your phone">
 							</div>
-							<div class="name-form">
+						</div>
+						<div class="row">
+							<div class="name-form col-6">
 								<i class="fa-regular fa-envelope"></i>
-								<input type="text" name="email" placeholder="Enter your email">
+								<input type="text" name="address" id="address" placeholder="Enter your pickup address">
 							</div>
-							<textarea placeholder="Enter your message"></textarea>
-							<button class="button-price">Submit Application</button>
-						</form>
-
+							<div class="name-form col-6">
+								<i class="fa-regular fa-envelope"></i>
+								<input type="text" name="email" id="email" placeholder="Enter your email address">
+							</div>
+							<button style="display: flex;justify-content: center;" type="submit" class="button-price" id="submitapplication" onclick="placeOrder()">
+								<img id="loader" src="{{asset('images/loader.gif')}}" style="width:80px;height:50px;display:none;">
+								<p id="submittxt">Submit Application</p>
+							</button>
 					</div>
 				</div>
 				</div>
@@ -184,4 +192,46 @@
 			</div>
 		</div>
 	</section>
+	@section('scripts')
+	<script>
+		function placeOrder(){
+		   var name = document.getElementById('name').value
+		  var phone = document.getElementById('phone').value
+		  let address = document.getElementById('address').value
+		  let email = document.getElementById('email').value
+		  if(name === '' || name === undefined){
+		   alert('Name of your business is required')
+		  }else if(phone  === '' || phone === undefined){
+		   alert('Phone number is required')
+		  }else if(address === ''  || address === undefined){
+		   alert('Pickup address is required.')
+		  }else if(email === ''  || email === undefined){
+		   alert('Prefered password is required.')
+		  }else{
+			document.getElementById('submittxt').style.display = 'none'
+			document.getElementById('loader').style.display = 'block'
+		   $.ajax({
+				   url: '{{ route('partner.front.register') }}',
+					   type: 'POST',
+					   data: {
+					   "_token": "{{ csrf_token() }}",
+					   name,phone,address,email
+						},
+					   success: function (response) {
+			document.getElementById('successtxt').innerHTML = response.message			   
+			document.getElementById('submittxt').style.display = 'block'
+			document.getElementById('loader').style.display = 'none'
+						},
+					   error: function (jqXHR, textStatus, errorThrown) {
+						document.getElementById('submittxt').style.display = 'block'
+			document.getElementById('loader').style.display = 'none'
+					   console.log(textStatus, errorThrown,jqXHR);
+					   }
+				   })
+   
+		
+		  }
+		}
+	</script>
+	@endsection
 	@endsection

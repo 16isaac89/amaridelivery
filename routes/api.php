@@ -53,3 +53,42 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Place
     Route::apiResource('places', 'PlaceApiController');
 });
+
+
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\vendor'], function () {
+    // Register
+    Route::post('partner/register', 'auth\RegisterController@register');
+    Route::post('/login/partner', 'auth\LoginController@login');
+
+    //order
+    Route::post('partner/get/zones', 'OrderController@getzones');
+    Route::post('/partner/save/order', 'OrderController@saveorder');
+    Route::post('/partner/get/orders', 'OrderController@getorders');
+    Route::post('/partner/cancel/order', 'OrderController@cancel');
+    //save token
+    Route::post('/partner/token', 'auth\RegisterController@savetoken');
+    Route::post('/partner/change/profile', 'auth\RegisterController@changeimage');
+    Route::post('/partner/change/profiledata', 'auth\ProfileController@profileedit');
+    Route::post('/partner/change/profilephone', 'auth\ProfileController@editphone');
+    Route::post('/partner/change/password', 'auth\ProfileController@editpassword');
+
+
+});
+Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\driver'], function () {
+    // Register
+    Route::post('driver/register', 'auth\RegisterController@register');
+    Route::post('/login/driver', 'auth\LoginController@login');
+
+    //save token
+    Route::post('/driver/token', 'auth\RegisterController@savetoken');
+
+    //order
+    Route::post('/driver/get/orders', 'OrderController@getorders');
+    //order states
+    Route::post('/driver/neworders', 'OrderController@neworders');
+    Route::post('/driver/order/accept', 'OrderController@acceptorder');
+    Route::post('/driver/order/reject', 'OrderController@rejectorder');
+    Route::post('/driver/activeorders', 'OrderController@activeorders');
+    Route::post('/driver/history', 'OrderController@history');
+
+});

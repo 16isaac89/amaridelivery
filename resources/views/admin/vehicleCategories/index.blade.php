@@ -36,6 +36,9 @@
                             {{ trans('cruds.vehicleCategory.fields.base') }}
                         </th>
                         <th>
+                            Icon
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -54,6 +57,13 @@
                             </td>
                             <td>
                                 {{ $vehicleCategory->base ?? '' }}
+                            </td>
+                            <td>
+                                @if($vehicleCategory->pic)
+                                    <a href="{{ $vehicleCategory->pic->getUrl() }}" target="_blank" style="display: inline-block">
+                                        <img src="{{ $vehicleCategory->pic->getUrl('thumb') }}">
+                                    </a>
+                                @endif
                             </td>
                             <td>
                                 @can('vehicle_category_show')

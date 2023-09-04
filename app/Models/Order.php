@@ -34,9 +34,20 @@ class Order extends Model
         'status',
         'driver_id',
         'route_id',
+        'zone_id',
+        'details',
+        'recipient_name',
+        'recipient_phone',
+        'pickup_inst',
+        'dropoff_inst',
         'created_at',
         'updated_at',
         'deleted_at',
+        'quantity',
+        'partner_id',
+        'pt_transaction_id',
+        'ptstatus',
+        'del_otp'
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -57,6 +68,10 @@ class Order extends Model
     public function driver()
     {
         return $this->belongsTo(Driver::class, 'driver_id');
+    }
+    public function partner()
+    {
+        return $this->belongsTo(Partner::class, 'partner_id');
     }
 
     public function route()

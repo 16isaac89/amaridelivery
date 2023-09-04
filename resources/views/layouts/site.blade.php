@@ -139,4 +139,5 @@
 	<script src="{{asset('/siteassets/assets/js/aos.js')}}"></script>
 	<!-- custom -->
 	<script src="{{asset('/siteassets/assets/js/custom.js')}}"></script>
+	@yield('scripts')
 </body>

@@ -32,6 +32,8 @@ class Fleet extends Model implements HasMedia
         'manufacturer',
         'name',
         'number',
+        'driver_id',
+        'category_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -70,5 +72,11 @@ class Fleet extends Model implements HasMedia
         });
 
         return $files;
+    }
+    public function driver(){
+        return $this->belongsTo(Driver::class);
+    }
+    public function category(){
+        return $this->belongsTo(VehicleCategory::class);
     }
 }

@@ -86,7 +86,15 @@
                                 {{ $order->datetime ?? '' }}
                             </td>
                             <td>
-                                {{ $order->status ?? '' }}
+                                @if ($order->status === 'pending')
+                                <span class="badge rounded-pill bg-warning text-dark">Pending</span>
+                                @elseif ($order->status === 'assigned')
+                                <span class="badge rounded-pill bg-primary text-dark">Assigned</span>
+                                @elseif ($order->status === 'canceled')
+                                <span class="badge rounded-pill bg-danger text-dark">Canceled</span>
+                                @elseif ($order->status === 'completed')
+                                <span class="badge rounded-pill bg-success text-dark">Completed</span>
+                                @endif
                             </td>
                             <td>
                                 {{ $order->driver->phone_1 ?? '' }}
@@ -116,6 +124,17 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
                                     </form>
+                                @endcan
+                                @can('order_assign')
+                                @if ($order->status === 'pending')
+                                <a class="btn btn-xs btn-success" href="{{ route('admin.assignorder.view', $order->id) }}">
+                                   Assign
+                                </a>
+                                @elseif ($order->status === 'assigned')
+                                <a class="btn btn-xs btn-warning" href="{{ route('admin.assignorder.view', $order->id) }}">
+                                    Reassign
+                                </a>
+                                @endif
                                 @endcan
 
                             </td>
@@ -176,7 +195,7 @@
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();
   });
-  
+
 })
 
 </script>

@@ -10,10 +10,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Laravel\Sanctum\HasApiTokens;
+
 
 class Driver extends Model implements HasMedia
 {
-    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory;
+    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory, HasApiTokens;
 
     public $table = 'drivers';
 
@@ -30,11 +32,13 @@ class Driver extends Model implements HasMedia
 
     protected $fillable = [
         'fullname',
+        'secondname',
         'email',
         'phone_1',
         'long',
         'lat',
         'password',
+        'fcm',
         'phone_2',
         'created_at',
         'updated_at',

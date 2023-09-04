@@ -13,6 +13,7 @@ use App\Models\Route;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\helpers\PushNotification;
 
 class OrderController extends Controller
 {
@@ -92,5 +93,27 @@ class OrderController extends Controller
         }
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+    public function neworders(){
+        $orders = Order::where('status','pending')->get();
+        //dd($orders);
+        return view('admin.orders.new', compact('orders'));
+    }
+    public function neworderassignview(Order $order){
+        $order->load('driver', 'route');
+        $drivers = Driver::pluck('phone_1', 'id','fullname')->prepend(trans('global.pleaseSelect'), '');
+        return view('admin.orders.assign', compact('drivers','order'));
+    }
+    public function neworderassign(Order $order){
+        $order->update([
+'driver_id'=>request()->driver_id,
+        ]);
+        $orders = Order::where('status','pending')->get();
+        $title = 'New order assignment';
+        $message = 'You have been assigned a new order please open the app to accept the order.';
+        $type = 1;
+        $fcm = Driver::find(request()->driver_id)->fcm;
+        (new PushNotification)->sendneworder($title,$fcm,$message,$type);
+        return view('admin.orders.new', compact('orders'));
     }
 }

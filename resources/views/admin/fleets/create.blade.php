@@ -52,6 +52,22 @@
                 <span class="help-block">{{ trans('cruds.fleet.fields.otherpapapers_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="routes">Driver</label>
+                <select class="form-control select2" name="driver_id" id="driver_id">
+                    @foreach($drivers as $driver)
+                        <option value="{{ $driver->id }}">{{ $driver->fullname }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="routes">Vehicle Category</label>
+                <select class="form-control select2" name="category_id" id="driver_id">
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

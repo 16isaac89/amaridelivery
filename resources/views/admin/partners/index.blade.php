@@ -45,6 +45,9 @@
                             {{ trans('cruds.partner.fields.description') }}
                         </th>
                         <th>
+                           Status
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -74,6 +77,15 @@
                                 {{ $partner->description ?? '' }}
                             </td>
                             <td>
+                                @if ($partner->status === 0)
+                                <span class="badge badge-pill badge-danger">Pending</span>
+                                 @elseif ($partner->status === 1) 
+                                 <span class="badge badge-pill badge-success">Accepted</span>  
+                                 @elseif ($partner->status === 2) 
+                                 <span class="badge badge-pill badge-warning">Denied</span>  
+                                @endif
+                            </td>
+                            <td>
                                 @can('partner_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.partners.show', $partner->id) }}">
                                         {{ trans('global.view') }}
@@ -85,6 +97,17 @@
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
+
+                                @can('partner_edit')
+                                <a class="btn btn-xs btn-success" href="{{ route('admin.partners.accept', $partner->id) }}">
+                                    Accept
+                                </a>
+                            @endcan
+                            @can('partner_edit')
+                            <a class="btn btn-xs btn-warning" href="{{ route('admin.partners.deny', $partner->id) }}">
+                                Deny
+                            </a>
+                        @endcan
 
                                 @can('partner_delete')
                                     <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">

@@ -9,6 +9,8 @@ use App\Http\Requests\MassDestroyFleetRequest;
 use App\Http\Requests\StoreFleetRequest;
 use App\Http\Requests\UpdateFleetRequest;
 use App\Models\Fleet;
+use App\Models\Driver;
+use App\Models\VehicleCategory;
 use Gate;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -30,8 +32,9 @@ class FleetController extends Controller
     public function create()
     {
         abort_if(Gate::denies('fleet_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return view('admin.fleets.create');
+        $drivers = Driver::all();
+        $categories = VehicleCategory::all();
+        return view('admin.fleets.create',compact('drivers','categories'));
     }
 
     public function store(StoreFleetRequest $request)

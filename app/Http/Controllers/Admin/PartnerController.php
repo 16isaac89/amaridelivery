@@ -81,4 +81,16 @@ class PartnerController extends Controller
 
         return response(null, Response::HTTP_NO_CONTENT);
     }
+    public function accept(Partner $partner){
+        $partner->update([
+            'status'=>1
+        ]);
+        return back(); 
+    }
+    public function deny(Partner $partner){
+        $partner->update([
+            'status'=>2
+        ]);
+        return back(); 
+    }
 }

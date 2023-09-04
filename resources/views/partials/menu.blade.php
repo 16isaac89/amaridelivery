@@ -223,6 +223,18 @@
                                     </a>
                                 </li>
                             @endcan
+                            @can('order_access')
+                                <li class="nav-item">
+                                    <a href="{{ route("admin.orders.new") }}" class="nav-link {{ request()->is("admin/orders") || request()->is("admin/orders/*") ? "active" : "" }}">
+                                        <i class="fa-fw nav-icon fas fa-hand-holding-usd">
+
+                                        </i>
+                                        <p>
+                                            New
+                                        </p>
+                                    </a>
+                                </li>
+                            @endcan
                             @can('partner_access')
                                 <li class="nav-item">
                                     <a href="{{ route("admin.partners.index") }}" class="nav-link {{ request()->is("admin/partners") || request()->is("admin/partners/*") ? "active" : "" }}">

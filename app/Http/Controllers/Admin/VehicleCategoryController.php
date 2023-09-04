@@ -11,16 +11,19 @@ use App\Models\VehicleCategory;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\Traits\MediaUploadingTrait;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
 
 class VehicleCategoryController extends Controller
 {
-    use CsvImportTrait;
+    use CsvImportTrait,MediaUploadingTrait;
 
     public function index()
     {
         abort_if(Gate::denies('vehicle_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $vehicleCategories = VehicleCategory::all();
+        $vehicleCategories = VehicleCategory::with(['media'])->get();
 
         return view('admin.vehicleCategories.index', compact('vehicleCategories'));
     }
@@ -35,7 +38,9 @@ class VehicleCategoryController extends Controller
     public function store(StoreVehicleCategoryRequest $request)
     {
         $vehicleCategory = VehicleCategory::create($request->all());
-
+        if ($request->input('pic', false)) {
+            $vehicleCategory->addMedia(storage_path('tmp/uploads/' . basename($request->input('pic'))))->toMediaCollection('pic');
+        }
         return redirect()->route('admin.vehicle-categories.index');
     }
 
@@ -49,7 +54,16 @@ class VehicleCategoryController extends Controller
     public function update(UpdateVehicleCategoryRequest $request, VehicleCategory $vehicleCategory)
     {
         $vehicleCategory->update($request->all());
-
+        if ($request->input('pic', false)) {
+            if (! $vehicleCategory->pic || $request->input('pic') !== $vehicleCategory->pic->file_name) {
+                if ($vehicleCategory->pic) {
+                    $vehicleCategory->pic->delete();
+                }
+                $vehicleCategory->addMedia(storage_path('tmp/uploads/' . basename($request->input('pic'))))->toMediaCollection('pic');
+            }
+        } elseif ($vehicleCategory->pic) {
+            $vehicleCategory->pic->delete();
+        }
         return redirect()->route('admin.vehicle-categories.index');
     }
 

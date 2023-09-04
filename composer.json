@@ -9,18 +9,19 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "bavix/laravel-wallet": "^7.3",
         "doctrine/dbal": "^3.0",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/dusk": "^6.11",
         "laravel/framework": "^8.70.1",
+        "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.5",
-        "yajra/laravel-datatables-oracle": "^9.18",
         "laravel/ui": "^3.3",
-        "spatie/laravel-medialibrary": "^9.11.2",
         "nuovo/spreadsheet-reader": "^0.5.11",
-        "laravel/sanctum": "^2.8"
+        "spatie/laravel-medialibrary": "^9.11.2",
+        "yajra/laravel-datatables-oracle": "^9.18"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
