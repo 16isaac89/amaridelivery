@@ -11,11 +11,13 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Laravel\Sanctum\HasApiTokens;
+use Bavix\Wallet\Traits\HasWallet;
+use Bavix\Wallet\Interfaces\Wallet;
 
 
-class Driver extends Model implements HasMedia
+class Driver extends Model implements HasMedia, Wallet
 {
-    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory, HasApiTokens;
+    use SoftDeletes, InteractsWithMedia, Auditable, HasFactory, HasApiTokens,HasWallet;
 
     public $table = 'drivers';
 

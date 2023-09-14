@@ -72,6 +72,9 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\vendor'],
     Route::post('/partner/change/profilephone', 'auth\ProfileController@editphone');
     Route::post('/partner/change/password', 'auth\ProfileController@editpassword');
 
+    //forgot password
+    Route::post('/partner/forgot/password', 'auth\ForgotPasswordController@sendResetLinkEmail');
+
 
 });
 Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\driver'], function () {
@@ -90,5 +93,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\driver'],
     Route::post('/driver/order/reject', 'OrderController@rejectorder');
     Route::post('/driver/activeorders', 'OrderController@activeorders');
     Route::post('/driver/history', 'OrderController@history');
+    Route::post('/driver/complete/order', 'OrderController@completeorder');
 
+    Route::post('/driver/wallet/balance', 'ProfileController@balance');
 });

@@ -12,6 +12,17 @@ Route::group(['namespace' => 'Site'], function () {
     Route::get('/partner', 'SiteController@partner')->name('front.partner');
     Route::post('/partner/register', 'SiteController@partnerregister')->name('partner.front.register');
     Route::get('/site/payment', 'SiteController@paymentdone')->name('paymentdone.screen');
+
+    //reset password vendor
+Route::get('/vendor/password/reset','auth\ForgotPasswordController@showLinkReqForm')->name('site.vendorresetpwd');
+Route::post('/vendor/password/email','auth\ForgotPasswordController@sendResLinkEmail')->name('site.vendorpwdemail');
+Route::get('/vendor/password/reset/{token}','auth\ResetPasswordController@showResetForm')->name('site.vendortoken');
+Route::post('/vendor/password/reset/post','auth\ResetPasswordController@reset')->name('site.vendorresetpwd.post');
+//reset password driver
+Route::get('/driver/password/reset','auth\ForgotPasswordController@showLinkReqForm')->name('site.driveresetpwd');
+Route::post('/driver/password/email','auth\ForgotPasswordController@sendResLinkEmail')->name('site.driverpwdemail');
+Route::get('/driver/password/reset/{token}','auth\ResetPasswordController@showResetForm')->name('site.drivertoken');
+Route::post('/driver/password/reset/post','auth\ResetPasswordController@reset')->name('site.driverresetpwd.post');
 });
 
 Route::get('/home', function () {

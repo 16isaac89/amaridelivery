@@ -12,10 +12,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\VendorResetPasswordNotification;
 
 class Partner extends Authenticatable implements HasMedia
 {
-    use SoftDeletes, Auditable, HasFactory,HasApiTokens, InteractsWithMedia;
+    use SoftDeletes, Auditable, HasFactory,HasApiTokens, InteractsWithMedia,Notifiable;
 
     public $table = 'partners';
     protected $appends = [
@@ -70,5 +72,12 @@ class Partner extends Authenticatable implements HasMedia
         }
 
         return $file;
+    }
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new VendorResetPasswordNotification($token));
+    }
+    public function orders(){
+        return $this->hasMany(Order::class, 'partner_id', 'id');
     }
 }
