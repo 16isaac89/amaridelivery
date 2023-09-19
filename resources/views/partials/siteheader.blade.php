@@ -20,11 +20,11 @@
 				        <li class="navbar-dropdown {{ \Request::routeIs('front.index') ? 'active' : '' }}">
 				          <a href="{{route('front.index')}}">Home</a>
 				        </li>
-				        <li class="navbar-dropdown {{ \Request::routeIs('front.about') ? 'active' : '' }}">
+				        {{-- <li class="navbar-dropdown {{ \Request::routeIs('front.about') ? 'active' : '' }}">
 				          <a href="{{route('front.about')}}">About Us</a>
 				        </li>
                         <li class="navbar-dropdown {{ \Request::routeIs('front.services') ? 'active' : '' }}"><a href="{{route('front.services')}}">Services</a></li>
-                        <li class="navbar-dropdown {{ \Request::routeIs('front.faq') ? 'active' : '' }}"><a href="{{route('front.faq')}}">FAQ</a></li>
+                        <li class="navbar-dropdown {{ \Request::routeIs('front.faq') ? 'active' : '' }}"><a href="{{route('front.faq')}}">FAQ</a></li> --}}
 				        <li class="navbar-dropdown {{ \Request::routeIs('front.contact') ? 'active' : '' }}">
 				          <a href="{{route('front.contact')}}">Contact Us</a>
 				        </li>

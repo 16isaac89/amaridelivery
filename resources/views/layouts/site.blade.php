@@ -42,7 +42,7 @@
 	<!-- loader end-->
 @include('partials.siteheader')
 	<!-- header -->
-	
+
   <!-- hero-section -->
 	@yield('content')
 
@@ -54,14 +54,14 @@
 	<section class="subscribe-section gap" style="background:#fcfcfc">
 		<div class="container">
 			<div class="row align-items-center">
-				<div class="col-lg-6" data-aos="flip-up"  data-aos-delay="200" data-aos-duration="300">
+				{{-- <div class="col-lg-6" data-aos="flip-up"  data-aos-delay="200" data-aos-duration="300">
 					<div class="img-subscribe">
-						<img alt="Illustration" src="https://via.placeholder.com/676x403">
+						<img alt="Illustration" src="{{ asset('images/signup.png') }}">
 					</div>
-				</div>
-				<div class="col-lg-5 offset-lg-1" data-aos="flip-up"  data-aos-delay="300" data-aos-duration="400">
+				</div> --}}
+				<div class="col-lg-12 offset-lg-1" data-aos="flip-up"  data-aos-delay="300" data-aos-duration="400">
 					<div class="get-the-menu">
-						<h2>Get the menu of your favorite restaurants every day</h2>
+						<h2>Subscribe to our news letter</h2>
 						<form>
 							<i class="fa-regular fa-bell"></i>
 							<input type="text" name="email" placeholder="Enter email address">
@@ -83,14 +83,11 @@
 
 						</a>
 						</a>
-						<h2>The Best Restaurants
-								in Your  Home</h2>
-						<p>Vitae congue mauris rhoncus aenean. Enim nulla
-							 aliquet porttitor lacus luctus accumsan
-								tortor posuere. Tempus egestas sed sed risus pretium quam.</p>
+					 <h6>Amarihitch Transport Delivery</h6>
+						<p>We are a trusted delivery transport company dedicated to providing fast and reliable delivery solutions. With a commitment to efficiency and customer satisfaction, we ensure your goods reach their destination on time, every time. Choose us for seamless delivery services you can depend on.</p>
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-6 col-sm-12">
+				{{-- <div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="menu">
 						<h4>Menu</h4>
 						<ul class="footer-menu">
@@ -100,7 +97,7 @@
 							<li><a href="contacts.html">Contacts<i class="fa-solid fa-arrow-right"></i></a></li>
 						</ul>
 					</div>
-				</div>
+				</div> --}}
 				<div class="col-lg-4 col-md-6 col-sm-12">
 					<div class="menu contacts">
 						<h4>Contacts</h4>
@@ -120,11 +117,11 @@
 				</div>
 			</div>
 			<div class="footer-two gap no-bottom">
-				<p>Copyright © 2022. Amari Hitch. All rights reserved.</p>
-				<div class="privacy">
-					<a href="#">Privacy Policy</a>
-					<a href="#">Terms & Services</a>
-				</div>
+                <p>
+				Copyright &copy; <script type="text/javascript">
+                    document.write("2019 - "+ new Date().getFullYear());
+                    </script>Amarihitch Transport Delivery </p>
+
 			</div>
 		</div>
 	</footer>
