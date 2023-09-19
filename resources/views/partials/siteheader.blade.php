@@ -129,12 +129,12 @@
 				  </li>
 
 				  <li><a href="about.html">About Us</a></li>
-                  <li >
+                  {{-- <li >
 				          <a href="{{route('front.about')}}">About Us</a>
 				        </li>
                         <li><a href="{{route('front.services')}}">Services</a></li>
                         <li><a href="{{route('front.faq')}}">FAQ</a></li>
-				        <li>
+				        <li> --}}
 				          <a href="{{route('front.contact')}}">Contact Us</a>
 				        </li>
                         <li> <a href="#" class="button button-2">Partner App</a></li>

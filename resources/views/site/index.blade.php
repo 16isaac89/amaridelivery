@@ -6,7 +6,7 @@
 				<div class="col-lg-6" data-aos="fade-up"  data-aos-delay="200" data-aos-duration="300">
 					<div class="restaurant">
 						<h3>The Best and Affordable delivery rates
-							in your Uganda</h3>
+							in Uganda</h3>
 						{{-- <p>Rates in Uganda.</p> --}}
 						{{-- <div class="nice-select-one">
 							<select class="nice-select Advice">
