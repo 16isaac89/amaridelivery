@@ -105,15 +105,25 @@ class OrderController extends Controller
         return view('admin.orders.assign', compact('drivers','order'));
     }
     public function neworderassign(Order $order){
+        $order->load('partner');
         $order->update([
 'driver_id'=>request()->driver_id,
         ]);
         $orders = Order::where('status','pending')->get();
+        $partner = $order->partner;
+        //dd($partner);
         $title = 'New order assignment';
         $message = 'You have been assigned a new order please open the app to accept the order.';
         $type = 1;
         $fcm = Driver::find(request()->driver_id)->fcm;
         (new PushNotification)->sendneworder($title,$fcm,$message,$type);
+
+        $title2 = 'Order assignment';
+        $message2 = 'Your order has been assigned to an agent.';
+        $type2 = 1;
+        $fcm2 = $partner->fcm;
+        (new PushNotification)->sendneworder($title2,$fcm2,$message2,$type2);
+        //dd('done');
         return view('admin.orders.new', compact('orders'));
     }
 }
