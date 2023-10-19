@@ -9,6 +9,7 @@ Route::group(['namespace' => 'Site'], function () {
     Route::get('/faq', 'SiteController@faq')->name('front.faq');
     Route::get('/services', 'SiteController@services')->name('front.services');
     Route::get('/contact', 'SiteController@contact')->name('front.contact');
+    Route::get('/privacy/policy', 'SiteController@privacy')->name('front.privacy');
     Route::get('/partner', 'SiteController@partner')->name('front.partner');
     Route::post('/partner/register', 'SiteController@partnerregister')->name('partner.front.register');
     Route::get('/site/payment', 'SiteController@paymentdone')->name('paymentdone.screen');

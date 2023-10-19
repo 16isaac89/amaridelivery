@@ -136,8 +136,9 @@
                         <li><a href="{{route('front.faq')}}">FAQ</a></li>
 				        <li> --}}
 				          <a href="{{route('front.contact')}}">Contact Us</a>
+                          <a href="{{route('front.privacy')}}">Privacy Policy</a>
 				        </li>
-                        <li> <a href="#" class="button button-2">Partner App</a></li>
+                        <li> <a href="#" class="button button-2">Customer App</a></li>
                         <li><a href="#" class="button button-2">Rider App</a></li>
 
                 </ul>

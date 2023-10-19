@@ -106,9 +106,10 @@ class OrderController extends Controller
     }
     public function neworderassign(Order $order){
         $order->load('partner');
-        $order->update([
-'driver_id'=>request()->driver_id,
-        ]);
+		$order->driver_id=request()->driver_id;
+		$order->status='assigned';
+		$order->save();
+        
         $orders = Order::where('status','pending')->get();
         $partner = $order->partner;
         //dd($partner);

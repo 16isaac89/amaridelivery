@@ -24,6 +24,9 @@ class SiteController extends Controller
     public function partner(){
         return view('site.partner');
     }
+    public function privacy(){
+        return view('site.privacy');
+    }
     public function partnerregister(){
         Partner::create([
             'name'=>request()->name,
