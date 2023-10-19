@@ -1,5 +1,15 @@
 @extends('layouts.site')
 @section('content')
+<div class="container">
+    <div class="row align-items-center">
+
+        <section class="hero-section about gap">
+            <div class="container">
+                    <div class="row align-items-center">
+
+                    </div>
+            </div>
+      </section>
 <h1>Privacy Policy</h1>
 <p>Last updated: October 19, 2023</p>
 <p>This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.</p>
@@ -192,4 +202,6 @@
 <ul>
 <li>By email: info@amarihitch.com</li>
 </ul>
+    </div>
+</div>
 @endsection
