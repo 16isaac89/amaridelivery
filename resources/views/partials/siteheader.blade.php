@@ -39,8 +39,8 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="extras bag">
-                    <a href="#" class="button button-2">Customer App</a>
-						 <a href="#" class="button button-2">Rider App</a>
+                    <a href="https://play.google.com/store/apps/details?id=com.customerapp.amarihitch" class="button button-2">Customer App</a>
+						 <a href="https://play.google.com/store/apps/details?id=com.riderapp.amarihitch" class="button button-2">Rider App</a>
 					</div>
 				</div>
 			 <div class="menu-wrap">
@@ -141,8 +141,8 @@
 				          <a href="{{route('front.contact')}}">Contact Us</a>
                           <a href="{{route('front.privacy')}}">Privacy Policy</a>
 				        </li>
-                        <li> <a href="#" class="button button-2">Customer App</a></li>
-                        <li><a href="#" class="button button-2">Rider App</a></li>
+                        <li> <a href="https://play.google.com/store/apps/details?id=com.customerapp.amarihitch" class="button button-2">Customer App</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.riderapp.amarihitch" class="button button-2">Rider App</a></li>
 
                 </ul>
 
