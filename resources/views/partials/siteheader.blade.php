@@ -20,6 +20,9 @@
 				        <li class="navbar-dropdown {{ \Request::routeIs('front.index') ? 'active' : '' }}">
 				          <a href="{{route('front.index')}}">Home</a>
 				        </li>
+                        <li class="navbar-dropdown {{ \Request::routeIs('front.privacy') ? 'active' : '' }}">
+                            <a href="{{route('front.privacy')}}">Privacy Policy</a>
+                          </li>
 				        {{-- <li class="navbar-dropdown {{ \Request::routeIs('front.about') ? 'active' : '' }}">
 				          <a href="{{route('front.about')}}">About Us</a>
 				        </li>
@@ -36,7 +39,7 @@
 				</div>
 				<div class="col-lg-3">
 					<div class="extras bag">
-                    <a href="#" class="button button-2">Partner App</a>
+                    <a href="#" class="button button-2">Customer App</a>
 						 <a href="#" class="button button-2">Rider App</a>
 					</div>
 				</div>
